@@ -1,48 +1,55 @@
+# Contributing to META.scm
+
+Thank you for your interest in contributing to META.scm! This document provides guidelines for contributing to the project.
+
+## Table of Contents
+
+- [Code of Conduct](#code-of-conduct)
+- [Getting Started](#getting-started)
+- [How to Contribute](#how-to-contribute)
+- [Development Workflow](#development-workflow)
+
+---
+
+## Code of Conduct
+
+Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md).
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Git
+- A text editor with S-expression/Scheme support (optional but recommended)
+
+### Development Setup
+
+```bash
 # Clone the repository
-git clone https://{{FORGE}}/{{OWNER}}/{{REPO}}.git
-cd {{REPO}}
-
-# Using Nix (recommended for reproducibility)
-nix develop
-
-# Or using toolbox/distrobox
-toolbox create {{REPO}}-dev
-toolbox enter {{REPO}}-dev
-# Install dependencies manually
-
-# Verify setup
-just check   # or: cargo check / mix compile / etc.
-just test    # Run test suite
+git clone https://github.com/hyperpolymath/META.scm.git
+cd META.scm
 ```
 
 ### Repository Structure
+
 ```
-{{REPO}}/
-├── src/                 # Source code (Perimeter 1-2)
-├── lib/                 # Library code (Perimeter 1-2)
-├── extensions/          # Extensions (Perimeter 2)
-├── plugins/             # Plugins (Perimeter 2)
-├── tools/               # Tooling (Perimeter 2)
-├── docs/                # Documentation (Perimeter 3)
-│   ├── architecture/    # ADRs, specs (Perimeter 2)
-│   └── proposals/       # RFCs (Perimeter 3)
-├── examples/            # Examples (Perimeter 3)
-├── spec/                # Spec tests (Perimeter 3)
-├── tests/               # Test suite (Perimeter 2-3)
-├── .well-known/         # Protocol files (Perimeter 1-3)
-├── .github/             # GitHub config (Perimeter 1)
+META.scm/
+├── spec/                # Specifications (ABNF, JSON Schema)
+├── examples/            # Example .scm files
+├── .github/             # GitHub config
 │   ├── ISSUE_TEMPLATE/
 │   └── workflows/
 ├── CHANGELOG.md
 ├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md      # This file
-├── GOVERNANCE.md
 ├── LICENSE
-├── MAINTAINERS.md
 ├── README.adoc
 ├── SECURITY.md
-├── flake.nix            # Nix flake (Perimeter 1)
-└── justfile             # Task runner (Perimeter 1)
+├── META.scm             # Project's own META.scm
+├── STATE.scm            # Project state
+└── ECOSYSTEM.scm        # Ecosystem relationships
 ```
 
 ---
@@ -53,25 +60,20 @@ just test    # Run test suite
 
 **Before reporting**:
 1. Search existing issues
-2. Check if it's already fixed in `{{MAIN_BRANCH}}`
-3. Determine which perimeter the bug affects
+2. Check if it's already fixed in `main`
 
 **When reporting**:
 
 Use the [bug report template](.github/ISSUE_TEMPLATE/bug_report.md) and include:
 
 - Clear, descriptive title
-- Environment details (OS, versions, toolchain)
 - Steps to reproduce
 - Expected vs actual behaviour
-- Logs, screenshots, or minimal reproduction
 
 ### Suggesting Features
 
 **Before suggesting**:
-1. Check the [roadmap](ROADMAP.md) if available
-2. Search existing issues and discussions
-3. Consider which perimeter the feature belongs to
+1. Search existing issues and discussions
 
 **When suggesting**:
 
@@ -80,37 +82,50 @@ Use the [feature request template](.github/ISSUE_TEMPLATE/feature_request.md) an
 - Problem statement (what pain point does this solve?)
 - Proposed solution
 - Alternatives considered
-- Which perimeter this affects
 
 ### Your First Contribution
 
 Look for issues labelled:
 
-- [`good first issue`](https://{{FORGE}}/{{OWNER}}/{{REPO}}/labels/good%20first%20issue) — Simple Perimeter 3 tasks
-- [`help wanted`](https://{{FORGE}}/{{OWNER}}/{{REPO}}/labels/help%20wanted) — Community help needed
-- [`documentation`](https://{{FORGE}}/{{OWNER}}/{{REPO}}/labels/documentation) — Docs improvements
-- [`perimeter-3`](https://{{FORGE}}/{{OWNER}}/{{REPO}}/labels/perimeter-3) — Community sandbox scope
+- [`good first issue`](https://github.com/hyperpolymath/META.scm/labels/good%20first%20issue) — Simple tasks
+- [`help wanted`](https://github.com/hyperpolymath/META.scm/labels/help%20wanted) — Community help needed
+- [`documentation`](https://github.com/hyperpolymath/META.scm/labels/documentation) — Docs improvements
 
 ---
 
 ## Development Workflow
 
 ### Branch Naming
+
 ```
-docs/short-description       # Documentation (P3)
-test/what-added              # Test additions (P3)
-feat/short-description       # New features (P2)
-fix/issue-number-description # Bug fixes (P2)
-refactor/what-changed        # Code improvements (P2)
-security/what-fixed          # Security fixes (P1-2)
+docs/short-description       # Documentation
+feat/short-description       # New features
+fix/issue-number-description # Bug fixes
 ```
 
 ### Commit Messages
 
 We follow [Conventional Commits](https://www.conventionalcommits.org/):
+
 ```
 <type>(<scope>): <description>
 
 [optional body]
 
 [optional footer]
+```
+
+**Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
+
+### Pull Request Process
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+---
+
+## License
+
+By contributing, you agree that your contributions will be licensed under the project's [AGPL-3.0-or-later](LICENSE) license.
